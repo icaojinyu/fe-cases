@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>02-loading动画-旋转</title>
+  <style>
+    html, body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      height: 100%;
+      background: #34495e;
+    }
+
+    .loading {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      /*background: red;*/
+      border-radius: 50%;
+      border-top: 10px solid #e74c3c;
+      box-sizing: border-box;
+      animation: a1 1s linear infinite;
+    }
+
+    .loading::before, .loading::after {
+      content: '';
+      width: 200px;
+      height: 200px;
+      position: absolute;
+      top: -10px;
+      left: 0;
+      border-radius: 50%;
+      box-sizing: border-box;
+    }
+
+    .loading::before {
+      border-top: 10px solid #2ecc71;
+      transform: rotate(120deg);
+    }
+
+    .loading::after {
+      border-top: 10px solid #3498db;
+      transform: rotate(-120deg);
+    }
+
+    .loading > span {
+      position: absolute;
+      top: -10px;
+      left: 0;
+      width: 200px;
+      height: 200px;
+      /*background: red;*/
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      animation: a2 1s linear infinite;
+    }
+
+    @keyframes a1 {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes a2 {
+      to {
+        transform: rotate(-360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="loading">
+  <span>Loading...</span>
+</div>
+</body>
+</html>
