@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>01-图片时钟</title>
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      background: #34495e;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .wrap {
+      display: flex;
+      height: 200px;
+    }
+
+    .wrap > section {
+      display: flex;
+      justify-content: space-between;
+      width: 310px;
+    }
+
+    .box {
+      width: 150px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .time {
+      height: 200%;
+    }
+
+    .time > span {
+      height: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(to bottom, #ff1e4c, #ff7633);
+      font-size: 140px;
+      color: #fff;
+    }
+
+    .dots {
+      width: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .dots span {
+      width: 20px;
+      height: 20px;
+      background: #fff;
+      border-radius: 50%;
+      margin: 15px 0;
+    }
+  </style>
+  <script src="../js/jquery.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <section>
+    <div class="box">
+      <div class="time">
+        <span>0</span>
+        <span>1</span>
+      </div>
+    </div>
+    <div class="box">
+      <div class="time">
+        <span>0</span>
+        <span>1</span>
+      </div>
+    </div>
+  </section>
+  <div class="dots">
+    <span></span>
+    <span></span>
+  </div>
+  <section>
+    <div class="box">
+      <div class="time">
+        <span>0</span>
+        <span>1</span>
+      </div>
+    </div>
+    <div class="box">
+      <div class="time">
+        <span>0</span>
+        <span>1</span>
+      </div>
+    </div>
+  </section>
+  <div class="dots">
+    <span></span>
+    <span></span>
+  </div>
+  <section>
+    <div class="box">
+      <div class="time">
+        <span>0</span>
+        <span>1</span>
+      </div>
+    </div>
+    <div class="box">
+      <div class="time">
+        <span>0</span>
+        <span>1</span>
+      </div>
+    </div>
+  </section>
+</div>
+<script>
+  let currentTime;
+
+  function getTime() {
+    let d = new Date();
+    let h = d.getHours();
+    let m = d.getMinutes();
+    let s = d.getSeconds();
+    return add0(h) + add0(m) + add0(s);
+  }
+
+  function add0(n) {
+    return n < 10 ? '0' + n : '' + n;
+  }
+
+  // 初始化
+  function init() {
+    currentTime = getTime();
+    $('.time').each(function (i) {
+      $('span', this).eq(0).html(currentTime[i]);
+    });
+    tick();
+  }
+
+  function tick() {
+    // 下一秒
+    let nextTime = getTime();
+    $('.time').each(function (i) {
+      if (currentTime[i] !== nextTime[i]) {
+        $('span', this).eq(0).html(currentTime[i]);
+        $('span', this).eq(1).html(nextTime[i]);
+        $(this).css('margin-top', 0).animate({
+          'margin-top': -200
+        }, 500);
+      }
+    });
+    currentTime = nextTime;
+    setTimeout(() => {
+      tick();
+      showDots();
+    }, 1000);
+  }
+
+
+  function showDots() {
+    $('.dots span').hide();
+    setTimeout(() => {
+      $('.dots span').show();
+    }, 500);
+  }
+
+  init();
+
+</script>
+</body>
+</html>
