@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>03-突出展示</title>
+  <style>
+    html,body{
+      margin: 0;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    ul{
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    img{
+      display: block;
+    }
+    .wrap{
+      width: 640px;
+      height: 430px;
+      border: 1px solid #000;
+    }
+    .wrap>ul{
+      display: flex;
+      flex-wrap:wrap;
+      padding: 10px 0 0 10px;
+    }
+    .wrap>ul>li{
+      position: relative;
+      width: 200px;
+      height: 200px;
+      margin: 0 10px 10px 0;
+    }
+    .wrap>ul>li.mask::before{
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+    }
+    .wrap>ul>li>img{
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <ul>
+    <li><img src="imgs/01.jpg" alt=""></li>
+    <li><img src="imgs/01.jpg" alt=""></li>
+    <li><img src="imgs/01.jpg" alt=""></li>
+    <li><img src="imgs/01.jpg" alt=""></li>
+    <li><img src="imgs/01.jpg" alt=""></li>
+    <li><img src="imgs/01.jpg" alt=""></li>
+  </ul>
+</div>
+<script src="../js/jquery.js"></script>
+<script>
+  $(function () {
+    // 事件委托:委托到子元素li上面
+    $('.wrap>ul').on('mouseenter','>li',function () {
+      // console.log(this);// li
+      $(this).removeClass('mask').siblings().addClass('mask');
+    }).on('mouseleave',function () {
+      $(this).children().removeClass('mask');
+    })
+  });
+</script>
+</body>
+</html>
