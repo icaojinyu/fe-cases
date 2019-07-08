@@ -136,7 +136,10 @@
     $('.time').each(function (i) {
       $('span', this).eq(0).html(currentTime[i]);
     });
-    tick();
+    setInterval(()=>{
+      tick();
+      showDots();
+    },1000);
   }
 
   function tick() {
@@ -152,10 +155,6 @@
       }
     });
     currentTime = nextTime;
-    setTimeout(() => {
-      tick();
-      showDots();
-    }, 1000);
   }
 
 
